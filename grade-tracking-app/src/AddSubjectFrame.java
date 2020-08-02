@@ -50,8 +50,12 @@ public class AddSubjectFrame extends JFrame implements ActionListener {
 		btnSubmit.addActionListener(this);
 	}
 	public void actionPerformed(ActionEvent e) {
-		main.getTrack().addSubject(new Subject(textObject.getText()));
-		
+		Tracking manage = main.getTrack();
+		String objectName = textObject.getText();
+		if (!manage.isInSubjectNameArray(objectName))
+			manage.addSubject(new Subject(objectName));
+		else
+			System.out.println(objectName+" is already in the list.");
 		setVisible(false);
 	}
 }

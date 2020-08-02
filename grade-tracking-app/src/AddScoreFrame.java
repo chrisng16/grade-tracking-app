@@ -32,7 +32,7 @@ public class AddScoreFrame extends JFrame implements ActionListener{
 		getContentPane().setLayout(null);
 		main = m;
 		
-		String[] subjectNames = main.getSubjectNames();
+		String[] subjectNames = main.getTrack().getSubjectNames();
 		System.out.println(Arrays.toString(subjectNames));
 		
 		JPanel panel = new JPanel();
@@ -101,6 +101,8 @@ public class AddScoreFrame extends JFrame implements ActionListener{
 			type="Final";
 		int score = Integer.parseInt(textField.getText());
 		System.out.println(subjectName+" "+type+" "+String.valueOf(score));
-		main.addScore(subjectName, type, score);
+		main.getTrack().addScore(subjectName, type, score);
+
+		setVisible(false);
 	}
 }

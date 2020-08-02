@@ -19,15 +19,15 @@ public class Subject {
 	public void addScore(String type, int score) {
 		if (type == "Quiz"){
 			quizScores.add(score);
-			System.out.println("Quiz Score Added!");
+			System.out.println("Quiz Score Added to "+name);
 		}
 		else if (type == "Midterm") {
 			midtermScores.add(score);
-			System.out.println("Midterm Score Added!");
+			System.out.println("Midterm Score Added to "+name);
 		}
 		else if (type == "Final") {
 			this.finalScore = score;
-			System.out.println("Final Score Added!");
+			System.out.println("Final Score Added to "+name);
 		}
 		else
 			System.out.println("Error");

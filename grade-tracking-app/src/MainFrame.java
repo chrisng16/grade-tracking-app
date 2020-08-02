@@ -3,7 +3,6 @@ import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -22,7 +21,6 @@ public class MainFrame extends JFrame implements ActionListener {
     private Tracking manage;
     private AddSubjectFrame addSubject;
     private AddScoreFrame addScore;
-    private String[] subjectNames;
     
     public MainFrame(){
     	super("Grade Tracking");
@@ -82,21 +80,8 @@ public class MainFrame extends JFrame implements ActionListener {
     		addScore.setVisible(true);
     	}
     }
+    
     public Tracking getTrack() {
     	return this.manage;
-    }
-    public String[] getSubjectNames() {
-    	ArrayList<Subject> subjects = manage.getSubjects();
-    	ArrayList<String> names = new ArrayList<String>();
-    	for (Subject s: subjects) {
-    		names.add(s.getName());
-    	}
-    	subjectNames = names.toArray(new String[names.size()]);
-    	System.out.println(subjectNames.length);
-    	return subjectNames;
-    }
-    public void addScore(String subjectName, String type, int score){
-        
-        manage.getSubject(subjectName).addScore(type, score);
     }
 }
