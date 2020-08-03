@@ -18,9 +18,11 @@ public class MainFrame extends JFrame implements ActionListener {
     private static final long serialVersionUID = -2124245560246536286L;
     private JButton btnAddSubject;
     private JButton btnAddScore;
+    private JButton btnReport;
     private Tracking manage;
     private AddSubjectFrame addSubject;
     private AddScoreFrame addScore;
+    private JTextArea textReport;
     
     public MainFrame(){
     	super("Grade Tracking");
@@ -50,26 +52,32 @@ public class MainFrame extends JFrame implements ActionListener {
         btnAddScore = new JButton("Add Score");
         funcPanel.add(btnAddScore);
         
+        btnReport = new JButton("Report");
+        funcPanel.add(btnReport);
+        
         JScrollPane ReportPanel = new JScrollPane();
         ReportPanel.setViewportBorder(new TitledBorder(null, "Report", TitledBorder.LEADING, TitledBorder.TOP, null, null));
         ReportPanel.setBounds(0, 58, 298, 395);
         getContentPane().add(ReportPanel);
         
-        JTextArea textReport = new JTextArea();
+        textReport = new JTextArea();
         textReport.setLineWrap(true);
+        textReport.setEditable(false);
         textReport.setWrapStyleWord(true);
         ReportPanel.setViewportView(textReport);
         
         btnAddSubject.addActionListener(this);
         btnAddScore.addActionListener(this);
+        btnReport.addActionListener(this);
 
     }
-    public void actionPerformed(ActionEvent e){
+
+	public void actionPerformed(ActionEvent e) {
     	if(e.getSource()==btnAddSubject) {
     		addSubject = new AddSubjectFrame(this);
             addSubject.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
             addSubject.setLocationRelativeTo(null);
-            addSubject.setSize(400,120);
+            addSubject.setSize(400,220);
     		addSubject.setVisible(true);
     	}
     	else if (e.getSource()==btnAddScore) {
@@ -79,8 +87,14 @@ public class MainFrame extends JFrame implements ActionListener {
             addScore.setSize(260,240);
     		addScore.setVisible(true);
     	}
+    	else if (e.getSource()==btnReport) {
+    		String report=manage.getReport("All");
+    		textReport.setText(report);
+    	}
     }
-    
+    public JTextArea getTextReport() {
+    	return this.textReport;
+    }
     public Tracking getTrack() {
     	return this.manage;
     }

@@ -2,13 +2,12 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Arrays;
-
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
@@ -31,9 +30,8 @@ public class AddScoreFrame extends JFrame implements ActionListener{
 		setResizable(false);
 		getContentPane().setLayout(null);
 		main = m;
-		
+		// Get subject name array to build JComboBox later
 		String[] subjectNames = main.getTrack().getSubjectNames();
-		System.out.println(Arrays.toString(subjectNames));
 		
 		JPanel panel = new JPanel();
 		panel.setBounds(12, 13, 230, 50);
@@ -87,11 +85,12 @@ public class AddScoreFrame extends JFrame implements ActionListener{
 		getContentPane().add(btnSubmit);	
 		
 		btnSubmit.addActionListener(this);
+		textField.addActionListener(this);
 	}
 	
 	public void actionPerformed(ActionEvent e) {
 		String subjectName=comboBox.getSelectedItem().toString();
-		System.out.println(subjectName);
+		
 		String type = "";
 		if (rdbtnQuiz.isSelected())
 			type="Quiz";
@@ -99,10 +98,17 @@ public class AddScoreFrame extends JFrame implements ActionListener{
 			type="Midterm";
 		else if (rdbtnFinal.isSelected())
 			type="Final";
-		int score = Integer.parseInt(textField.getText());
-		System.out.println(subjectName+" "+type+" "+String.valueOf(score));
-		main.getTrack().addScore(subjectName, type, score);
-
-		setVisible(false);
+		try {
+			int score = Integer.parseInt(textField.getText());
+			
+			String report=main.getTrack().addScore(subjectName, type, score);
+			if (report == "Error")
+				JOptionPane.showMessageDialog(null, "Error: No type was choosen. Please select one type...", "Error", JOptionPane.ERROR_MESSAGE);
+			else {	
+				main.getTextReport().setText(report);
+			}
+		} catch (Exception error) {
+			JOptionPane.showMessageDialog(null, "Your score must be an integer. Please try again...");
+		}
 	}
 }
