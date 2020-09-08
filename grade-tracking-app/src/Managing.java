@@ -7,13 +7,13 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Tracking implements Serializable {
+public class Managing implements Serializable {
 
 	private static final long serialVersionUID = -2301011962178459787L;
 	private ArrayList<Subject> subjects;
 	private String[] subjectNamesArray;
 	// Constructor of tracking
-	public Tracking() {
+	public Managing() {
 		subjects = loadData();
 	}
 
@@ -54,7 +54,7 @@ public class Tracking implements Serializable {
 	private Subject getSubject(String subjectName){
 		Subject temp = new Subject("temp",0,0,0);
 		for(Subject s: subjects){
-			if (s.getName()==subjectName)
+			if (s.getName().equals(subjectName))
 				temp=s;
 		}
 		return temp;
@@ -62,7 +62,7 @@ public class Tracking implements Serializable {
 	
 	public String getReport(String type) {
 		StringBuilder report = new StringBuilder();
-		if (type == "All") {
+		if (type == "ALL") {
 			for (Subject s: subjects) {
 				report.append(s.report());
 			}

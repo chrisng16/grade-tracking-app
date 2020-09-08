@@ -9,8 +9,6 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 
-import com.sun.xml.internal.ws.util.StringUtils;
-
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.Font;
@@ -100,9 +98,9 @@ public class AddSubjectFrame extends JFrame implements ActionListener {
 		textObject.addActionListener(this);
 	}
 	public void actionPerformed(ActionEvent e) {
-		Tracking manage = main.getTrack();
+		Managing manage = main.manage();
 		try {
-			String objectName = StringUtils.capitalize(textObject.getText());
+			String objectName = textObject.getText().toUpperCase();
 			int quizPercent = Integer.parseInt(txtQuizPercent.getText());
 			int midtermPercent = Integer.parseInt(txtMidtermPercent.getText());
 			int finalPercent = Integer.parseInt(txtFinalPercent.getText());

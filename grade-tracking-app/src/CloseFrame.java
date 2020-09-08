@@ -55,7 +55,7 @@ public class CloseFrame extends JFrame implements ActionListener{
 			main.dispose();
 		}
 		else if (e.getSource()==btnSaveExit) {
-			main.getTrack().saveData();
+			main.manage().saveData();
 			dispose();
 			main.dispose();
 		}

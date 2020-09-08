@@ -33,33 +33,38 @@ public class Subject implements Serializable {
 	}
 	// Add score
 	public String addScore(String type, int score) {
+		StringBuilder report = new StringBuilder();
 		if (type == "Quiz"){
 			quizScores.add(score);
+			report.append(type+" "+quizScores.size());
 		}
 		else if (type == "Midterm") {
 			midtermScores.add(score);
+			report.append(type+" "+midtermScores.size());
 		}
 		else if (type == "Final") {
 			this.finalScore = score;
+			report.append(type);
 		}
 		else
 			return "Error";
 		
-		return type +" score added to "+ name;
+		return report.append(" is added to "+ name).toString();
 	}
 	// Calculate GPA
 	private void calculateGPA() {
 		int quizTotal=0,midtermTotal=0;
+		
 		for (int quiz: quizScores) {
 			quizTotal+=quiz;
 		}
-		System.out.println(quizTotal);
 		quizAvg=(double)quizTotal/(double)(quizScores.size());
+		
 		for (int midterm: midtermScores) {
 			midtermTotal+=midterm;
 		}
 		midtermAvg=(double)midtermTotal/(double)(midtermScores.size());
-		System.out.println(midtermTotal);
+
 		if (finalScore!=0) {
 			GPA=midtermAvg*midtermPercent+quizAvg*quizPercent+(double)finalScore*finalPercent;
 			calculateLetterGrade(GPA);
@@ -86,20 +91,38 @@ public class Subject implements Serializable {
 		StringBuilder report = new StringBuilder();
 		report.append("Subject: "+name
 					+"\nQuiz Average: "+ round(quizAvg)
+					+reportDetails("Quiz")
 					+"\nMidterm Average: "+round(midtermAvg)
+					+reportDetails("Midterm")
 					+"\nFinal Score: "+finalScore
 					+"\nGPA: "+round(this.GPA)
 					+"\nLetter Grade: "+this.letterGrade
 					+"\n\n");
 		return report.toString();
 	}
+	
 	public String getName() {
 		return this.name;
 	}
+	
+	private String reportDetails(String type) {
+		StringBuilder details = new StringBuilder();
+		if (type == "Quiz") {
+			for(int i = 1; i <= quizScores.size(); i++) {
+				details.append("\n    Quiz " + i + ": "+quizScores.get(i-1));
+			}
+		}
+		if (type == "Midterm") {
+			for(int i = 1; i <= midtermScores.size(); i++) {
+				details.append("\n    Midterm " + i + ": "+midtermScores.get(i-1));
+			}
+		}
+		return details.toString();
+	}
+	
 	// Round quiz and midterm average to two decimals
 	private double round(double number) {
 		double temp = Math.floor(number*100)/100;
-		System.out.println(temp);
 		return temp;
 	}
 }

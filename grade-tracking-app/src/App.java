@@ -10,6 +10,7 @@ public class App {
                 MainFrame main = new MainFrame();
                 main.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
                 main.setSize(500,500);
+                main.setResizable(false);
                 main.setLocationRelativeTo(null);
                 main.setVisible(true);
                 

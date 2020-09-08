@@ -19,14 +19,15 @@ public class MainFrame extends JFrame implements ActionListener {
     private JButton btnAddSubject;
     private JButton btnAddScore;
     private JButton btnReport;
-    private Tracking manage;
+    private Managing manage;
     private AddSubjectFrame addSubject;
     private AddScoreFrame addScore;
+    private ReportOptionFrame reportOption;
     private JTextArea textReport;
     
     public MainFrame(){
     	super("Grade Tracking");
-    	manage = new Tracking();
+    	manage = new Managing();
     	setBounds(0,0,500,500);
         getContentPane().setLayout(null);   
     	
@@ -88,14 +89,18 @@ public class MainFrame extends JFrame implements ActionListener {
     		addScore.setVisible(true);
     	}
     	else if (e.getSource()==btnReport) {
-    		String report=manage.getReport("All");
-    		textReport.setText(report);
+    		reportOption = new ReportOptionFrame(this);
+    		reportOption.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+    		reportOption.setLocationRelativeTo(null);
+    		reportOption.setSize(400,95);
+    		reportOption.setResizable(false);
+    		reportOption.setVisible(true);
     	}
     }
     public JTextArea getTextReport() {
     	return this.textReport;
     }
-    public Tracking getTrack() {
+    public Managing manage() {
     	return this.manage;
     }
 }

@@ -31,7 +31,7 @@ public class AddScoreFrame extends JFrame implements ActionListener{
 		getContentPane().setLayout(null);
 		main = m;
 		// Get subject name array to build JComboBox later
-		String[] subjectNames = main.getTrack().getSubjectNames();
+		String[] subjectNames = main.manage().getSubjectNames();
 		
 		JPanel panel = new JPanel();
 		panel.setBounds(12, 13, 230, 50);
@@ -101,7 +101,7 @@ public class AddScoreFrame extends JFrame implements ActionListener{
 		try {
 			int score = Integer.parseInt(textField.getText());
 			
-			String report=main.getTrack().addScore(subjectName, type, score);
+			String report = main.manage().addScore(subjectName, type, score);
 			if (report == "Error")
 				JOptionPane.showMessageDialog(null, "Error: No type was choosen. Please select one type...", "Error", JOptionPane.ERROR_MESSAGE);
 			else {	
